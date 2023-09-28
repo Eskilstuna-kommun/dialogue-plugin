@@ -1,10 +1,9 @@
-const merge = require('webpack-merge');
-const common = require('./webpack.common.js');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common');
 
 module.exports = merge(common, {
   output: {
-    path: `${__dirname}/../../../origo/plugins/dialogue`,
+    path: `${__dirname}/../../EK-extern/plugins/`,
     publicPath: '/build/js',
     filename: 'dialogue.js',
     libraryTarget: 'var',
@@ -12,36 +11,20 @@ module.exports = merge(common, {
     library: 'Dialogue'
   },
   mode: 'development',
+  devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.scss$/,
-        use: [{
-          loader: 'style-loader'
-        },
-        {
-          loader: 'css-loader'
-        },
-        {
-          loader: 'sass-loader'
-        }
-        ]
-      },
-      {
-        test: /\.svg$/i,
-        use: [
-          {
-            loader: 'inline-loader'
-          }
-        ]
+        test: /\.(scss|css)$/,
+        use: ['style-loader', 'css-loader', 'sass-loader']
       }
     ]
   },
-  plugins: [
-    new WriteFilePlugin()
-  ],
   devServer: {
-    contentBase: './',
-    port: 9008
+    static: './',
+    port: 9008,
+    devMiddleware: {
+      writeToDisk: true
+    }
   }
 });

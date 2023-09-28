@@ -1,8 +1,7 @@
 const webpack = require('webpack');
-const merge = require('webpack-merge');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const { merge } = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const common = require('./webpack.common.js');
+const common = require('./webpack.common');
 
 module.exports = merge(common, {
   optimization: {
@@ -45,25 +44,10 @@ module.exports = merge(common, {
           loader: 'sass-loader'
         }
         ]
-      },
-      {
-        test: /\.svg$/i,
-        use: [
-          {
-            loader: 'inline-loader'
-          }
-        ]
       }
     ]
   },
   plugins: [
-    new UglifyJSPlugin({
-      uglifyOptions: {
-        output: {
-          beautify: false
-        }
-      }
-    }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new MiniCssExtractPlugin({
       filename: '../css/dialogue.css'
