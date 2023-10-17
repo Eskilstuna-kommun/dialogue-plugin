@@ -108,18 +108,18 @@ function bindUIActions() {
   });
 
   $editAttribute.on('click', (e) => {
-    dispatcher.emitToggleEdit('attribute');
     $editAttribute.blur();
+    dispatcher.emitToggleEdit('attribute');
     e.preventDefault();
   });
   $editDelete.on('click', (e) => {
-    dispatcher.emitToggleEdit('delete');
     $editDelete.blur();
+    dispatcher.emitToggleEdit('delete');
     e.preventDefault();
   });
   $editDone.on('click', (e) => {
-    window.open(goToLink, '_self');
     $editDelete.blur();
+    window.open(goToLink, '_self');
     e.preventDefault();
   });
 
